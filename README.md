@@ -13,7 +13,7 @@ Open terminal and run this command ruby class.rb
 
 ## Author
 
-👤 **Nonhlanhla Reginah Mndebele**
+👤 **Nonhlanhla Mndebele**
 
 - GitHub: [@Nonhlanhla](https://https://github.com/29td)
 - Twitter: [@NonhlanhlaMnde6](https://twitter.com/NonhlanhlaMnde6)
