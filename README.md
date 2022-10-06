@@ -15,7 +15,7 @@ Open terminal and run this command ruby class.rb
 
 👤 **Nonhlanhla R Mndebele**
 
-- GitHub: [@Nonhlanhla](https://https://github.com/29td)
+- GitHub: [@Nonhlanhla](https://github.com/29td)
 - Twitter: [@NonhlanhlaMnde6](https://twitter.com/NonhlanhlaMnde6)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/nonhlanhla-mndebele-ab7448226)
 
