@@ -70,11 +70,16 @@ class App
   end
 
   def list_books
-    @books.each_with_index { |book, index| puts "Book: #{index} ID:#{book.id} title: #{book.title} author: #{book.author}" }
+    @books.each_with_index { |book, index|
+      puts "Book: #{index} ID:#{book.id} title: #{book.title} author: #{book.author}"
+    }
   end
 
   def list_people
-    @people.each_with_index { |person, index| puts "Person: #{index} ID: #{person.id} name: #{person.name} age: #{person.age} parent_permission: #{person.parent_permission} " }
+    @people.each_with_index { |person, index|
+      puts "Person: #{index} ID: #{person.id} name: #{person.name}
+      age: #{person.age} parent_permission: #{person.parent_permission} "
+    }
   end
 
   def list_rentals
