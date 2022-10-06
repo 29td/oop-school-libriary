@@ -32,6 +32,8 @@ Style/DefWithParentheses:
   Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
+Style/BlockDelimiters:
+  Enabled: false
 
 Layout/HashAlignment:
   EnforcedColonStyle: key
@@ -53,4 +55,6 @@ Style/HashTransformValues:
 Naming/FileName:
   Enabled: false
 Lint/DuplicateMethods:
+  Enabled: false
+Metrics/MethodLength:
   Enabled: false
