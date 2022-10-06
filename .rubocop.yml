@@ -52,3 +52,5 @@ Style/HashTransformValues:
   Enabled: false
 Naming/FileName:
   Enabled: false
+Lint/DuplicateMethods:
+  Enabled: false
