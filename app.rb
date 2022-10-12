@@ -1,103 +1,116 @@
-require_relative 'student'
-require_relative 'teacher'
+require_relative 'person'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'teacher'
+require_relative 'student'
+require 'date'
 
 class App
+  attr_accessor :people, :books, :rentals
+
   def initialize
-    @books = []
     @people = []
+    @books = []
     @rentals = []
   end
 
-  def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    choice = gets.chomp.to_i
-
-    case choice
+  def add_person
+    puts 'Do you whant to create a Student (1) 0r Teacher (2)? [input the number]'
+    type = gets.chomp.to_i
+    case type
     when 1
-      create_student
+      puts 'Create a Student'
+      puts 'What is your name?'
+      name = gets.chomp
+      puts 'What is your age?'
+      age = gets.chomp
+      puts 'Did you get your parent permissiom [Y/N]?'
+      parent_permission = gets.chomp.downcase
+      add_student_helper(age, name, parent_permission: parent_permission)
     when 2
-      create_teacher
-    else
-      puts 'Incorrect choice'
+      puts 'Create a Teacher'
+      puts 'What is your name?'
+      name = gets.chomp
+      puts 'What is your age?'
+      age = gets.chomp
+      puts 'What is your specialization?'
+      specialization = gets.chomp
+      add_teacher_helper(age, name, specialization)
     end
   end
 
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
+  def add_student_helper(age, name, perm)
+    student = Student.new(age, name, perm)
+    @people.push(student)
+    puts 'Student created successfully'
+  end
 
-    book = Book.new(title, author)
+  def add_teacher_helper(age, name, spec)
+    teacher = Teacher.new(age, name, spec)
+    @people.push(teacher)
+    puts 'Teacher created successfully'
+  end
+
+  def add_book
+    puts 'Add new Book!'
+    puts 'Book title :'
+    title = gets.chomp
+    puts 'Book author :'
+    author = gets.chomp
+    add_book_helper(author, title)
+  end
+
+  def add_book_helper(author, title)
+    book = Book.new(author, title)
     @books.push(book)
     puts 'Book created successfully'
   end
 
-  def create_rental
-    puts 'Select a book from the following list by number'
+  def add_rental
+    puts 'Add rental'
+    puts 'Select Book from the following list by number'
     list_books
     book_index = gets.chomp.to_i
-    puts 'Select a person from the following list by number (not id)'
+    puts 'Select Person from the following list by number'
     list_people
     person_index = gets.chomp.to_i
-    print 'Date: '
+    puts "Date: #{Date.today}"
     date = gets.chomp
+    add_rental_helper(date, books[book_index], people[person_index])
+  end
 
-    rental = Rental.new(date, @books[book_index], @people[person_index])
+  def add_rental_helper(date, book, peopl)
+    rental = Rental.new(date, book, peopl)
     @rentals.push(rental)
-
     puts 'Rental created successfully'
   end
 
   def list_books
-    return puts 'No books found!' if @books.empty?
-
-    @books.each_with_index { |book, i| puts "#{i}) Title: #{book.title}, Author: #{book.author}" }
+    @books.each_with_index { |book, index|
+      puts "Book: #{index} ID:#{book.id} title: #{book.title} author: #{book.author}"
+    }
   end
 
   def list_people
-    return puts 'No people found!' if @people.empty?
-
-    @people.each_with_index do |person, i|
-      puts "#{i}) [#{person.class}] Name: #{person.name}, Age: #{person.age}, ID: #{person.id}"
-    end
+    @people.each_with_index { |person, index|
+      puts "Person: #{index} ID: #{person.id} name: #{person.name}
+      age: #{person.age} parent_permission: #{person.parent_permission} "
+    }
   end
 
   def list_rentals
-    puts 'Enter ID of the person'
     list_people
-    person_id = gets.chomp.to_i
-    person = @people.select { |p| p.id == person_id }[0]
-    person.rentals.each_with_index { |rental, i| puts "#{i}) Book: #{rental.book.title}, Date: #{rental.date}" }
+    puts 'ID of person:'
+    id = gets.chomp.to_i
+    person = @people.select { |x| x.id == id }[0]
+    if person
+      person.rentals.each { |rental| puts "Rental: #{rental.date} book: #{rental.book.title}" }
+    else
+      puts 'Wron input please try again!!'
+    end
   end
 
-  private
-
-  def create_student
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parent permission? [Y/N]: '
-    permission = gets.chomp.downcase == 'y'
-
-    student = Student.new(nil, age, name, permission)
-    @people.push(student)
-    puts 'Person created successfully'
-  end
-
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Specialization: '
-    specialization = gets.chomp
-
-    teacher = Teacher.new(specialization, age, name)
-    @people.push(teacher)
-    puts 'Person created successfully'
+  def exit_method
+    abort 'Thank you for using this App!'
   end
 end

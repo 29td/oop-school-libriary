@@ -1,4 +1,4 @@
-require_relative 'refactor'
+require_relative 'refractor'
 
 puts 'Welcome to School Library App!'
 puts ' '
