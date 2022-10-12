@@ -11,7 +11,7 @@ then press Enter
 Run this command code . to open this folder in VScode
 Open terminal and run this command ruby class.rb
 
-## Author
+## Authors
 
 👤 **Nonhlanhla R Mndebele**
 
