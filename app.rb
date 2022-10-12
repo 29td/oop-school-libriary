@@ -85,8 +85,32 @@ class App
 
   def add_rental_helper(date, book, peopl)
     rental = Rental.new(date, book, peopl)
+    save_rental(rental)
     @rentals.push(rental)
     puts 'Rental created successfully'
+  end
+
+  def save_rental(rental)
+    if File.exist?('rentals.json')
+      rentals_loaded = JSON.parse(File.read('rentals.json'))
+      rentals_loaded << { date: rental.date, person_id: rental.person.id, book: rental.book.title }
+      File.write('rentals.json', JSON.pretty_generate(rentals_loaded))
+    else
+      File.write('rentals.json',
+                 JSON.pretty_generate([{ date: rental.date, person_id: rental.person.id, book: rental.book.title }]))
+    end
+  end
+
+  def load_rentals
+    return unless File.exist?('rentals.json')
+
+    rentals_loaded = JSON.parse(File.read('rentals.json'))
+    rentals_loaded.each do |rental|
+      book = @books.select { |x| x.title == rental['book'] }[0]
+      person = @people.select { |x| x.id == rental['person_id'] }[0]
+      new_rental = Rental.new(rental['date'], book, person)
+      @rentals << new_rental
+    end
   end
 
   def list_books
