@@ -26,9 +26,7 @@ class App
       age = gets.chomp
       puts 'Did you get your parent permissiom [Y/N]?'
       parent_permission = gets.chomp.downcase
-      student = Student.new(age, name, parent_permission: parent_permission)
-      @people.push(student)
-      puts 'Student created successfully'
+      add_student_helper(age, name, parent_permission: parent_permission)
     when 2
       puts 'Create a Teacher'
       puts 'What is your name?'
@@ -37,10 +35,20 @@ class App
       age = gets.chomp
       puts 'What is your specialization?'
       specialization = gets.chomp
-      teacher = Teacher.new(age, name, specialization)
-      @people.push(teacher)
-      puts 'Teacher created successfully'
+      add_teacher_helper(age, name, specialization)
     end
+  end
+
+  def add_student_helper(age, name, perm)
+    student = Student.new(age, name, perm)
+    @people.push(student)
+    puts 'Student created successfully'
+  end
+
+  def add_teacher_helper(age, name, spec)
+    teacher = Teacher.new(age, name, spec)
+    @people.push(teacher)
+    puts 'Teacher created successfully'
   end
 
   def add_book
@@ -49,6 +57,10 @@ class App
     title = gets.chomp
     puts 'Book author :'
     author = gets.chomp
+    add_book_helper(author, title)
+  end
+
+  def add_book_helper(author, title)
     book = Book.new(author, title)
     @books.push(book)
     puts 'Book created successfully'
@@ -64,7 +76,11 @@ class App
     person_index = gets.chomp.to_i
     puts "Date: #{Date.today}"
     date = gets.chomp
-    rental = Rental.new(date, books[book_index], people[person_index])
+    add_rental_helper(date, books[book_index], people[person_index])
+  end
+
+  def add_rental_helper(date, book, peopl)
+    rental = Rental.new(date, book, peopl)
     @rentals.push(rental)
     puts 'Rental created successfully'
   end

@@ -11,13 +11,20 @@ then press Enter
 Run this command code . to open this folder in VScode
 Open terminal and run this command ruby class.rb
 
-## Author
+## Authors
 
 👤 **Nonhlanhla R Mndebele**
 
 - GitHub: [@Nonhlanhla](https://github.com/29td)
 - Twitter: [@NonhlanhlaMnde6](https://twitter.com/NonhlanhlaMnde6)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/nonhlanhla-mndebele-ab7448226)
+  
+  
+👤 **Esmatullah Ahmadzai (Esmat)**
+
+- GitHub: [@Esmatullah Ahamdzai](https://github.com/eaesmat)
+- Twitter: [@Esmatullah Ahamdzai](https://twitter.com/ea_ahmadzai)
+- LinkedIn: [@Esmatullah Ahamdzai](https://www.linkedin.com/in/esmatullah-ahmadzai/)
 
 ## 🤝 Contributing
 

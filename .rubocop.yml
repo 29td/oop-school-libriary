@@ -58,3 +58,5 @@ Lint/DuplicateMethods:
   Enabled: false
 Metrics/MethodLength:
   Enabled: false
+Layout/EndOfLine:
+  Enabled: false
