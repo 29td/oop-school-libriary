@@ -1,11 +1,15 @@
 require_relative 'spec_helper'
 
-describe Trimmerdecorator do
-  context 'With valid arguments' do
-    it 'should trim name of a person' do
-      new_person = Person.new(34, nil, 'Abdelmejid Oumer Ali')
-      cap_name = Trimmerdecorator.new(new_person)
-      expect(cap_name.correct_name).to eq 'Abdelmejid'
+describe TrimmerDecorator do
+  before :each do
+    person = Person.new(30, 'maximilianus')
+    person.correct_name
+    @trimed = TrimmerDecorator.new(person)
+  end
+
+  describe '#new' do
+    it 'should trim the long string' do
+      expect(@trimed.correct_name).to eql 'maximilian'
     end
   end
 end

@@ -1,23 +1,19 @@
 require_relative 'spec_helper'
 
 describe Classroom do
-  context 'With valid arguments' do
-    it 'should create an instance' do
-      new_classroom = Classroom.new('SE Class')
-      expect(new_classroom.label).to eq 'SE Class'
-    end
+  before :each do
+    @classroom = Classroom.new('Label')
+  end
 
-    it 'should change the label of classroom' do
-      new_classroom = Classroom.new('SE Class')
-      new_classroom.label = 'IT Class'
-      expect(new_classroom.label).to eq 'IT Class'
+  describe '#new' do
+    it 'takes 1 parameter and return an Classroom object' do
+      expect(@classroom).to be_an_instance_of Classroom
     end
+  end
 
-    it 'should add student' do
-      new_classroom = Classroom.new('SE Class')
-      new_student = Student.new(nil, nil, 21, 'Said', true)
-      new_classroom.add_student(new_student)
-      expect(new_classroom.students.length).to eq 1
+  describe '#lable' do
+    it 'should return correct label' do
+      expect(@classroom.label).to eql 'Label'
     end
   end
 end
