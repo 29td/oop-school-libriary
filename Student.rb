@@ -1,4 +1,4 @@
-require_relative 'person'
+require_relative 'Person'
 
 class Student < Person
   attr_reader :classroom, :parent_permission

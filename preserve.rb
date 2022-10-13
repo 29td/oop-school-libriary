@@ -1,6 +1,6 @@
 require 'json'
-require_relative 'student'
-require_relative 'teacher'
+require_relative 'Student'
+require_relative 'Teacher'
 require_relative 'book'
 require_relative 'rental'
 

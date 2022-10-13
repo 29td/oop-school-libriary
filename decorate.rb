@@ -9,6 +9,6 @@ class Decorator < Nameable
   end
 
   def correct_name
-    @naneable.correct_name
+    @nameable.correct_name
   end
 end
