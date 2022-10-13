@@ -6,6 +6,8 @@ require_relative 'teacher'
 require_relative 'student'
 require 'date'
 
+# rubocop:disable Metrics/ClassLength
+
 class App
   attr_accessor :people, :books, :rentals
 
@@ -13,6 +15,9 @@ class App
     @people = []
     @books = []
     @rentals = []
+    load_people
+    load_books
+    load_rentals
   end
 
   def add_person
@@ -41,13 +46,14 @@ class App
   end
 
   def add_student_helper(age, name, perm)
-    student = Student.new(nil, nil, age, name, permission)
+    student = Student.new(age, name, perm)
+    puts "id: #{student.id}, name: #{student.name}, age: #{student.age}, permission: #{student.parent_permission}"
     save_person(student)
     @people.push(student)
     puts 'Student created successfully'
   end
 
-  def add_teacher_helper(age, name, spec)
+  def add_teacher_helper(age, name, _spec)
     teacher = Teacher.new(specialization, nil, age, name)
     save_person(teacher)
     @people.push(teacher)
@@ -98,18 +104,6 @@ class App
     else
       File.write('rentals.json',
                  JSON.pretty_generate([{ date: rental.date, person_id: rental.person.id, book: rental.book.title }]))
-    end
-  end
-
-  def load_rentals
-    return unless File.exist?('rentals.json')
-
-    rentals_loaded = JSON.parse(File.read('rentals.json'))
-    rentals_loaded.each do |rental|
-      book = @books.select { |x| x.title == rental['book'] }[0]
-      person = @people.select { |x| x.id == rental['person_id'] }[0]
-      new_rental = Rental.new(rental['date'], book, person)
-      @rentals << new_rental
     end
   end
 
@@ -164,7 +158,7 @@ class App
     people_loaded.each do |person|
       case person['type']
       when 'student'
-        new_person = Student.new(nil, person['id'], person['age'], person['name'], person['parent_permission'])
+        new_person = Student.new(person['age'], person['name'], person['parent_permission'])
         @people << new_person
       when 'teacher'
         new_person = Teacher.new(person['specialization'], person['id'], person['age'], person['name'])
@@ -180,6 +174,18 @@ class App
     }
   end
 
+  def load_rentals
+    return unless File.exist?('rentals.json')
+
+    rentals_loaded = JSON.parse(File.read('rentals.json'))
+    rentals_loaded.each do |rental|
+      book = @books.select { |x| x.title == rental['book'] }[0]
+      person = @people.select { |x| x.id == rental['person_id'] }[0]
+      new_rental = Rental.new(rental['date'], book, person)
+      rentals << new_rental
+    end
+  end
+
   def list_rentals
     list_people
     puts 'ID of person:'
@@ -188,7 +194,7 @@ class App
     if person
       person.rentals.each { |rental| puts "Rental: #{rental.date} book: #{rental.book.title}" }
     else
-      puts 'Wron input please try again!!'
+      puts 'Wrong input please try again!!'
     end
   end
 
@@ -196,3 +202,4 @@ class App
     abort 'Thank you for using this App!'
   end
 end
+# rubocop:enable Metrics/ClassLength

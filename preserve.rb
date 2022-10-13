@@ -58,7 +58,7 @@ class Preserve
     people_loaded.each do |person|
       case person['type']
       when 'student'
-        new_person = Student.new(nil, person['id'], person['age'], person['name'], person['parent_permission'])
+        new_person = Student.new(person['id'], person['age'], person['name'], person['parent_permission'])
         @people << new_person
       when 'teacher'
         new_person = Teacher.new(person['specialization'], person['id'], person['age'], person['name'])
